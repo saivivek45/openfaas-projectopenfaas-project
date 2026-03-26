@@ -10,19 +10,22 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
 
     - name: Terraform Init
       run: terraform init
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
+    - name: Terraform Validate
+      run: terraform validate
 
-    - name: Install faas-cli
-      run: curl -sL https://cli.openfaas.com | sudo sh
+    - name: Terraform Plan (Safe)
+      run: terraform plan
 
-    - name: Skip Deployment (Local Minikube)
+    - name: Skip Apply (Local Cluster)
+      run: echo "Terraform apply skipped - local Minikube not accessible"
+
+    - name: Skip OpenFaaS Deploy
       run: echo "Deployment skipped - local cluster"
