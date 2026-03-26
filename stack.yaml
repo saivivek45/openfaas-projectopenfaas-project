@@ -1,0 +1,9 @@
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+
+functions:
+  hello-node:
+    lang: node22
+    handler: ./hello-node
+    image: saivivek33/hello-node:latest
